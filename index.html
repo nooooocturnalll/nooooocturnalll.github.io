@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Surprise Countdown</title>
+    <style>
+      body {
+        font-family: "Playfair Display", serif;
+        text-align: center;
+        padding: 50px;
+        background: linear-gradient(135deg, #f8cdda, #ff9a9e);
+        color: #333;
+      }
+      #countdown-container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        display: inline-block;
+        max-width: 400px;
+        margin: auto;
+      }
+      h1 {
+        font-size: 1.8em;
+        color: #b71c1c;
+      }
+      #countdown {
+        font-size: 2em;
+        font-weight: bold;
+        color: #b71c1c;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+      .time-box {
+        background: #b71c1c;
+        color: white;
+        padding: 12px;
+        border-radius: 8px;
+        min-width: 70px;
+      }
+      #content {
+        display: none;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        margin: auto;
+        margin-top: 20px;
+      }
+      p {
+        font-size: 1.2em;
+        color: #444;
+      }
+      .gift-box {
+        font-size: 40px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+      }
+      .gift-box:hover {
+        transform: scale(1.1);
+      }
+      .heart {
+        color: #b71c1c;
+        font-size: 18px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="countdown-container">
+      <h1>Menunggu Momen Spesial Dapat Dibuka Dalam:</h1>
+      <div id="countdown">
+        <div class="time-box" id="days">00</div>
+        <div class="time-box" id="hours">00</div>
+        <div class="time-box" id="minutes">00</div>
+        <div class="time-box" id="seconds">00</div>
+      </div>
+      <div class="heart">❤️</div>
+    </div>
+    <div id="content">
+      <h1>Selamat Ulang Tahun! 🎉</h1>
+      <p>Sebuah kejutan istimewa menantimu! Klik kado!</p>
+      <div class="gift-box" onclick="openGift()">🎁</div>
+    </div>
+    <script>
+      const targetDate = new Date("2025-03-03T00:00:00").getTime();
+      const countdownContainer = document.getElementById("countdown-container");
+      const contentElement = document.getElementById("content");
+      const daysElement = document.getElementById("days");
+      const hoursElement = document.getElementById("hours");
+      const minutesElement = document.getElementById("minutes");
+      const secondsElement = document.getElementById("seconds");
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const difference = targetDate - now;
+
+        if (difference <= 0) {
+          countdownContainer.style.display = "none";
+          contentElement.style.display = "block";
+        } else {
+          const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          const minutes = Math.floor(
+            (difference % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+          daysElement.innerHTML = days;
+          hoursElement.innerHTML = hours;
+          minutesElement.innerHTML = minutes;
+          secondsElement.innerHTML = seconds;
+        }
+      }
+
+      function openGift() {
+        window.location.href = "ultah/index.html";
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    </script>
+  </body>
+</html>
